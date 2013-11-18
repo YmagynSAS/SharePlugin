@@ -6,19 +6,24 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 
-import org.apache.cordova.api.Plugin;
-import org.apache.cordova.api.PluginResult;
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.PluginResult;
 
-public class Share extends Plugin {
+public class Share extends CordovaPlugin {
 
         @Override
-        public PluginResult execute(String action, JSONArray args, String callbackId) {
+        public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
                 try {
                         JSONObject jo = args.getJSONObject(0);
                         doSendIntent(jo.getString("subject"), jo.getString("text")); 
-                        return new PluginResult(PluginResult.Status.OK);
+                        PluginResult pr = new PluginResult(PluginResult.Status.OK);
+                        callbackContext.sendPluginResult(pr);
+                        return true;
                 } catch (JSONException e) {
-                        return new PluginResult(PluginResult.Status.JSON_EXCEPTION);
+                	PluginResult pr = new PluginResult(PluginResult.Status.JSON_EXCEPTION);
+                    callbackContext.sendPluginResult(pr);
+                	return false;
                 }
         }
         
