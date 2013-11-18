@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+xmlns:android="http://schemas.android.com/apk/res/android"
+id="org.apache.cordova.share.Share"
+    version="0.0.1">
+	
+    <name>Share</name>
+	<author>Ymagyn</author>
+	<description>
+		Share plugin
+	</description>
+	<license>MIT</license>
+	<js-module src="www/Share.js" name="Share">
+        <clobbers target="window.share" />
+    </js-module>
+	
+	<platform name="android">
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="Share" >
+				<param name="android-package" value="org.apache.cordova.share.Share"/>
+			</feature>
+		</config-file>
+		<source-file src="src/android/Share.java" target-dir="src/org/apache/cordova/share" />
+	</platform>
